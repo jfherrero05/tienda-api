@@ -1,0 +1,4 @@
+[
+{ "id": 1, "nombre": "Teclado mecánico", "precio": 49.99, "categoriaId": 1 },
+{ "id": 2, "nombre": "Ratón gamer", "precio": 29.99, "categoriaId": 1 }
+]
