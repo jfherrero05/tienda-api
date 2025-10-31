@@ -1,4 +1,4 @@
-const pedidosController = require('../services/pedidosService');
+const pedidosService = require('../services/pedidosService');
 exports.obtenerTodos = (req, res) => {
 const pedidos = pedidosService.listar();
 res.json(pedidos);

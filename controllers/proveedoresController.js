@@ -1,4 +1,4 @@
-const proveedoresController = require('../services/proveedoresService');
+const proveedoresService = require('../services/proveedoresService');
 exports.obtenerTodos = (req, res) => {
 const proveedores = proveedoresService.listar();
 res.json(proveedores);

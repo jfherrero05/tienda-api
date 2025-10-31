@@ -1,4 +1,4 @@
-const categoriasController = require('../services/categoriasService');
+const categoriasService = require('../services/categoriasService');
 exports.obtenerTodos = (req, res) => {
 const categorias = categoriasService.listar();
 res.json(categorias);
