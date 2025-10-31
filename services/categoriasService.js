@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const ruta = path.join(__dirname, '../data/pedidos.json');
+const ruta = path.join(__dirname, '../data/categorias.json');
 function leer() {
 const data = fs.readFileSync(ruta, 'utf-8');
 return JSON.parse(data);
