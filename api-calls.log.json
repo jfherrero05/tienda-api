@@ -1,0 +1,32 @@
+[
+  {
+    "timestamp": "2025-11-14T12:30:13.424Z",
+    "method": "GET",
+    "url": "/",
+    "ip": "::1"
+  },
+  {
+    "timestamp": "2025-11-14T12:30:35.784Z",
+    "method": "GET",
+    "url": "/",
+    "ip": "::1"
+  },
+  {
+    "timestamp": "2025-11-14T12:31:26.158Z",
+    "method": "GET",
+    "url": "/",
+    "ip": "::1"
+  },
+  {
+    "timestamp": "2025-11-14T12:31:40.935Z",
+    "method": "GET",
+    "url": "/API/PRODUCTOS",
+    "ip": "::1"
+  },
+  {
+    "timestamp": "2025-11-14T12:31:40.972Z",
+    "method": "GET",
+    "url": "/favicon.ico",
+    "ip": "::1"
+  }
+]
