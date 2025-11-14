@@ -1,22 +1,27 @@
-// server.js (Copia y pega TODO esto, reemplazando el archivo original)
 const express = require('express');
-const fs = require('fs'); // <--- AÑADIDO
-const path = require('path'); // <--- AÑADIDO
-const initData = require('./tienda-api/initData'); // <--- AÑADIDO
+const fs = require('fs');
+const path = require('path'); 
+const initData = require('./tienda-api/initData'); 
 const app = express();
-
-// 1. Ejecutar script de inicialización
-initData(); // <--- AÑADIDO
 
 app.use(express.json());
 
-// 2. Middleware de Logging
-const logPath = path.join(__dirname, 'data/api-calls.log.json'); // Usamos /data para el log
-app.use((req, res, next) => {
-    // Mostrar en consola (Requisito)
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+// Validar entradas de POST 
+app.post('*', (req, res, next) => {
+    if (!req.body || Object.keys(req.body).length === 0) {
+        return res.status(400).json({ mensaje: 'El cuerpo de la petición no puede estar vacío' });
+    }
+    next(); 
+});
 
-    // Guardar en log JSON (Mejora solicitada)
+/* Crear un script de inicialización que genere automáticamente los JSON vacíos si
+no existen */
+initData(); 
+
+// Middleware de logging 
+const logPath = path.join(__dirname, 'data/api-calls.log.json'); // Archivo de logs
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
     const logEntry = {
         timestamp: new Date().toISOString(),
         method: req.method,
@@ -40,34 +45,11 @@ app.use((req, res, next) => {
     next();
 });
 
-// Importar rutas
+//Rutas 
 app.use('/api/productos', require('./routes/productosRoutes'));
-app.use('/api/categorias',require('./routes/categoriasRoutes'));
-app.use('/api/carritos',require('./routes/carritosRoutes'));
-app.use('/api/clientes',require('./routes/clientesRoutes'));
-app.use('/api/pedidos',require('./routes/pedidosRoutes'));
-app.use('/api/proveedores',require('./routes/proveedoresRoutes'));
-//definir el resto de routes
-// server.js
-
-// ... (tus imports y app.use(express.json()) se mantienen)
-
-// Importar rutas...
-
-//definir el resto de routes
-//Mejora solicitada, guardar en un log de json todas las llamadas a la API <--- REEMPLAZA ESTA LÍNEA
-
-// ------------------------------------------------------------------
-// Middleware de Logging (Consola)
-app.use((req, res, next) => {
-    // Requisito: Mostrar en consola cada petición
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-
-    // Nota: El logging de JSON se ha simplificado al de consola 
-    //       para evitar añadir fs y path si el archivo original no los tiene.
-    
-    next();
-});
-// ------------------------------------------------------------------
-
+app.use('/api/categorias', require('./routes/categoriasRoutes'));
+app.use('/api/carritos', require('./routes/carritosRoutes'));
+app.use('/api/clientes', require('./routes/clientesRoutes'));
+app.use('/api/pedidos', require('./routes/pedidosRoutes'));
+app.use('/api/proveedores', require('./routes/proveedoresRoutes'));
 app.listen(3000, () => console.log('Servidor escuchando en http://localhost:3000'));
